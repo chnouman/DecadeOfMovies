@@ -1,5 +1,6 @@
 package com.noumanch.decadeofmovies.ui.fragments.detail
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +21,7 @@ class MoviesDetailAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int) =
         ImageViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_image, parent, false)
         )
 
     override fun getItemCount() = images.size
@@ -36,8 +37,8 @@ class MoviesDetailAdapter(
     class ImageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemImageBinding.bind(view)
         fun bind(image: Image) {
-            Glide.with(binding.imgPicture.context).load(image.getImageUrl())
-                .into(binding.imgPicture)
+            Glide.with(binding.imageView.context).load(image.getImageUrl())
+                .into(binding.imageView)
 
         }
     }

@@ -8,7 +8,7 @@ import com.noumanch.decadeofmovies.repositories.local.PreferencesManager
 import com.noumanch.decadeofmovies.repositories.local.db.Db
 import com.noumanch.decadeofmovies.repositories.local.db.MoviesDao
 import com.noumanch.decadeofmovies.repositories.remote.FlickerApiService
-import com.noumanch.decadeofmovies.ui.fragments.detail.MovieDetailsViewModel
+import com.noumanch.decadeofmovies.viewmodels.MovieDetailsViewModel
 import com.noumanch.decadeofmovies.viewmodels.MoviesViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,6 +17,7 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 val viewModelModule = module {
@@ -40,6 +41,7 @@ val repositoryModule = module {
             .baseUrl(FlickerApiService.FLICKER_API_URL)
             .client(get())
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .build()
         retrofit.create(FlickerApiService::class.java)
 
@@ -47,7 +49,7 @@ val repositoryModule = module {
 
     single {
         val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         OkHttpClient.Builder()
             .addInterceptor(logging)
             .build()

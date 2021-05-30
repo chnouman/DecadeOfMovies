@@ -1,7 +1,7 @@
 package com.noumanch.decadeofmovies.repositories.remote
 
-import com.noumanch.decadeofmovies.repositories.remote.responses.ImageSearchResponse
-import retrofit2.Response
+import com.noumanch.decadeofmovies.repositories.remote.models.response.GetImagesResponse
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -16,7 +16,7 @@ interface FlickerApiService {
         @Query("text") title: String,
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
-    ): Response<ImageSearchResponse>
+    ): Observable<GetImagesResponse>
 
     companion object {
         const val FLICKER_API_URL = "https://api.flickr.com/"

@@ -1,4 +1,4 @@
-package com.noumanch.decadeofmovies.ui.fragments.detail
+package com.noumanch.decadeofmovies.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -39,8 +39,7 @@ class MovieDetailsViewModel(
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
                 .subscribe({
-                    var photosResponse = it.body()?.photos
-                    var images = photosResponse?.photos
+                     var images = it?.photos?.photos
 
                     if (images == null) {
                         _uiState.postValue(MovieDetailsViewState.NoImageFound)

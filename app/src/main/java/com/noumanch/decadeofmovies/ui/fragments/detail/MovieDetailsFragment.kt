@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.chip.Chip
-import com.google.android.material.snackbar.Snackbar
 import com.noumanch.decadeofmovies.databinding.FragmentMovieDetailBinding
 import com.noumanch.decadeofmovies.models.Image
 import com.noumanch.decadeofmovies.utils.extensions.hide
 import com.noumanch.decadeofmovies.utils.extensions.show
+import com.noumanch.decadeofmovies.viewmodels.MovieDetailsViewModel
 import org.koin.android.ext.android.inject
 
 
@@ -20,6 +21,7 @@ class MovieDetailsFragment : Fragment() {
     private lateinit var binding: FragmentMovieDetailBinding
     private val photosList = arrayListOf<Image>()
     private lateinit var recyclerAdapter: MoviesDetailAdapter
+    private val args by navArgs<MovieDetailsFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,14 +32,12 @@ class MovieDetailsFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setupViews()
         initObservations()
-//        viewModel.init(movie!!)
+        viewModel.init(args.movie)
     }
 
     fun setupViews() {
@@ -50,7 +50,7 @@ class MovieDetailsFragment : Fragment() {
         }
     }
 
-    fun initObservations() {
+    private fun initObservations() {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is MovieDetailsViewModel.MovieDetailsViewState.Success -> {

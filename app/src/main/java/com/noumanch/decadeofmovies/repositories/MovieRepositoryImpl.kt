@@ -1,7 +1,6 @@
 package com.noumanch.decadeofmovies.repositories
 
 import android.app.Application
-import android.preference.PreferenceManager
 import com.google.gson.Gson
 import com.noumanch.decadeofmovies.BuildConfig
 import com.noumanch.decadeofmovies.models.Movie
@@ -9,12 +8,10 @@ import com.noumanch.decadeofmovies.repositories.local.PreferencesManager
 import com.noumanch.decadeofmovies.repositories.local.db.AssetMoviesResponse
 import com.noumanch.decadeofmovies.repositories.local.db.MoviesDao
 import com.noumanch.decadeofmovies.repositories.remote.FlickerApiService
-import com.noumanch.decadeofmovies.repositories.remote.responses.ImageSearchResponse
+import com.noumanch.decadeofmovies.repositories.remote.models.response.GetImagesResponse
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
-import kotlinx.coroutines.Dispatchers
-import retrofit2.Response
 import java.io.IOException
-import java.io.InputStream
 
 class MovieRepositoryImpl(
     val application: Application,
@@ -24,17 +21,15 @@ class MovieRepositoryImpl(
     IMovieRepository {
     override fun getMovies(): Single<MutableList<Movie>> {
         //check if movies are already loaded to db
-        return if (PreferencesManager.moviesLoaded()) {
-            //load from db
-            Single.fromCallable {
+        return Single.fromCallable {
+            if (PreferencesManager.moviesLoaded()) {
+                //load from db
                 getAllMoviesFromDatabase()
-            }
-        } else {
-            //pick from json and store it to room db
-            readAssets()?.let {
-                saveAssetMoviesInDatabase(it)
-            }
-            Single.fromCallable {
+            } else {
+                //pick from json and store it to room db
+                readAssets()?.let {
+                    saveAssetMoviesInDatabase(it)
+                }
                 getAllMoviesFromDatabase()
             }
         }
@@ -70,15 +65,13 @@ class MovieRepositoryImpl(
         query: String,
         page: Int,
         perPageImages: Int
-    ): Single<Response<ImageSearchResponse>> {
-        return Single.create {
-            flickrApi.getImages(
+    ): Observable<GetImagesResponse> {
+        return flickrApi.getImages(
                 title = query,
                 apiKey = BuildConfig.FLICKER_API_KEY,
                 page = page,
                 perPage = perPageImages
             )
-        }
     }
 
     override fun getAllMoviesWithName(query: String): Single<List<Movie>> {

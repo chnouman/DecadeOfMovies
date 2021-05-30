@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.noumanch.decadeofmovies.R
 import com.noumanch.decadeofmovies.databinding.FragmentMoviesBinding
 import com.noumanch.decadeofmovies.utils.extensions.hide
@@ -78,6 +79,7 @@ class MoviesFragment : Fragment() {
     private fun setupViews() {
         //create Adapter
         adapter = MoviesAdapter(mutableListOf()) { movie ->
+            findNavController().navigate(MoviesFragmentDirections.actionMoviesFragmentToMovieDetailsFragment(movie))
         }
         binding.recyclerView.adapter = adapter
         binding.progressBar.show()
