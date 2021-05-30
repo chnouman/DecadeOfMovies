@@ -5,7 +5,10 @@
         <item name="android:focusable">true</item>
         <item name="cardElevation">@dimen/cardViewElevation</item>
         <item name="rippleColor">@color/cardRippleColor</item>
-        <item name="cardBackgroundColor">@color/white</item>
-    </style>
+     </style>
 
+    <style name="RatingBar" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="colorControlNormal">@color/divider_grey</item>
+        <item name="colorControlActivated">@color/white</item>
+    </style>
 </resources>

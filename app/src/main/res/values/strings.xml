@@ -6,4 +6,6 @@
     <string name="alert_dialog_error_title">Error</string>
     <string name="alert_dialog_error_message_beginning">" %1$s \nCause: %2$s"</string>
     <string name="search_movies_str">Search Movie</string>
+    <string name="hello">Hello</string>
+    <string name="decade_of_movies">Decade Of Movies</string>
 </resources>

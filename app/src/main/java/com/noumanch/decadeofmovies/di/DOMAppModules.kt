@@ -4,7 +4,7 @@ import com.noumanch.decadeofmovies.utils.rxjava.AppSchedulerProviderImpl
 import com.noumanch.decadeofmovies.utils.rxjava.ISchedulerProvider
 import com.noumanch.decadeofmovies.repositories.IMovieRepository
 import com.noumanch.decadeofmovies.repositories.MovieRepositoryImpl
-import com.noumanch.decadeofmovies.repositories.local.PreferencesManager
+import com.noumanch.decadeofmovies.repositories.local.prefs.PreferencesManager
 import com.noumanch.decadeofmovies.repositories.local.db.Db
 import com.noumanch.decadeofmovies.repositories.local.db.MoviesDao
 import com.noumanch.decadeofmovies.repositories.remote.FlickerApiService

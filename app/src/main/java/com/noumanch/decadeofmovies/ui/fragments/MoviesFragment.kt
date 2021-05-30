@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.noumanch.decadeofmovies.R
 import com.noumanch.decadeofmovies.databinding.FragmentMoviesBinding
+import com.noumanch.decadeofmovies.models.Movie
+import com.noumanch.decadeofmovies.utils.Constants
 import com.noumanch.decadeofmovies.utils.extensions.hide
 import com.noumanch.decadeofmovies.utils.extensions.show
 import com.noumanch.decadeofmovies.utils.showAlertDialog
@@ -62,8 +64,10 @@ class MoviesFragment : Fragment() {
                         binding.emptyLayout.emptyTitleTV.hide()
                         binding.emptyLayout.emptySubHeadingTV.hide()
                         binding.emptyLayout.emptyIV.hide()
+                        //fill up some colors
                         adapter.update(viewState.movies)
                         adapter.notifyDataSetChanged()
+                        binding.recyclerView.scrollToPosition(0)
                     } else {
                         populateEmptyView()
                     }
@@ -72,6 +76,8 @@ class MoviesFragment : Fragment() {
         })
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
@@ -79,8 +85,10 @@ class MoviesFragment : Fragment() {
     }
 
     private fun setupViews() {
+
+        binding.topLayout.setBackgroundResource(R.drawable.cardview_bg)
         //create Adapter
-        adapter = MoviesAdapter(mutableListOf(), { movie ->
+        adapter = MoviesAdapter(arrayListOf(), { movie ->
             findNavController().navigate(
                 MoviesFragmentDirections.actionMoviesFragmentToMovieDetailsFragment(
                     movie
@@ -102,7 +110,6 @@ class MoviesFragment : Fragment() {
         //load data
         moviesViewModel.getMovies()
     }
-
 
     private fun populateEmptyView() {
         adapter.clearData()

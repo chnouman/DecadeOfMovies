@@ -1,4 +1,4 @@
-package com.noumanch.decadeofmovies.repositories.local
+package com.noumanch.decadeofmovies.repositories.local.prefs
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -3,11 +3,12 @@ package com.noumanch.decadeofmovies.ui.fragments
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.noumanch.decadeofmovies.R
 import com.noumanch.decadeofmovies.databinding.ItemMovieBinding
-import com.noumanch.decadeofmovies.databinding.ItemMovieHeadingBinding
 import com.noumanch.decadeofmovies.models.Movie
+import com.noumanch.decadeofmovies.utils.Constants
 import com.noumanch.decadeofmovies.utils.extensions.hide
 import com.noumanch.decadeofmovies.utils.extensions.show
 
@@ -40,8 +41,17 @@ class MoviesAdapter(
         fun bind(movie: Movie, position: Int) {
             binding.movieTitleTV.text = movie.title
             binding.movieYearTV.text = "${movie.year}"
-            binding.movieRating.text = "${movie.rating}"
+            binding.movieRating.rating = movie.rating.toFloat()
+            binding.movieRating.stepSize = 1.0f
+            binding.movieRating.numStars = 5
             binding.heading.text = "${movie.year}"
+
+            binding.cardView.setCardBackgroundColor(
+                Constants.getMatColor(
+                    binding.cardView.context,
+                    "500"
+                )
+            )
             if (updatedSearchQuery.invoke().isEmpty())
                 binding.heading.hide()
             else {
@@ -54,10 +64,15 @@ class MoviesAdapter(
         }
     }
 
-    fun update(list: List<Movie>) {
-        movies.clear()
-        movies.addAll(list)
-        notifyDataSetChanged()
+    fun update(list: MutableList<Movie>) {
+        val diffResult = DiffUtil.calculateDiff(
+            PostsDiffUtilCallback(
+                movies,
+                list
+            )
+        )
+        movies = list
+        diffResult.dispatchUpdatesTo(this)
     }
 
     fun clearData() {

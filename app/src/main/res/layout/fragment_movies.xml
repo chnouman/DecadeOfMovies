@@ -6,23 +6,74 @@
     android:layout_height="match_parent"
     android:background="?android:attr/colorBackground">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/txtSearch"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/topLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableStart="@android:drawable/ic_menu_search"
-        android:drawablePadding="10dp"
-        android:drawableTint="@color/brownish_grey"
-        android:hint="@string/search_movies_str"
-        android:imeOptions="actionSearch"
-        android:inputType="text"
-        android:lines="1"
-        android:padding="10dp"
-        android:textColor="?attr/colorSecondary"
-        android:textColorHint="@color/brownish_grey"
+        app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.noumanch.decadeofmovies.ui.widgets.textviews.RegularTextView
+                android:id="@+id/helloTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/hello"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.noumanch.decadeofmovies.ui.widgets.textviews.BoldTextView
+                android:id="@+id/decadesTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/decade_of_movies"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/helloTV" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/ic_search_icon"
+                android:drawablePadding="10dp"
+                 android:hint="@string/search_movies_str"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                app:fontFamily="@font/karla_regular"
+                android:textCursorDrawable="@null"
+                android:lines="1"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/brownish_grey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/decadesTV" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -36,7 +87,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtSearch"
+        app:layout_constraintTop_toBottomOf="@id/topLayout"
         tools:listitem="@layout/item_movie" />
 
     <include

@@ -3,7 +3,7 @@ package com.noumanch.decadeofmovies
 import android.app.Application
 import com.noumanch.decadeofmovies.di.repositoryModule
 import com.noumanch.decadeofmovies.di.viewModelModule
-import com.noumanch.decadeofmovies.repositories.local.PreferencesManager
+import com.noumanch.decadeofmovies.repositories.local.prefs.PreferencesManager
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 

@@ -4,6 +4,7 @@ package com.noumanch.decadeofmovies.models
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
  import kotlinx.android.parcel.Parcelize
 
@@ -29,7 +30,8 @@ data class Movie(
 
 
     @ColumnInfo(name = "genres")
-    var genres: List<String>? = null
+    var genres: List<String>? = null,
+
 ): Parcelable {
 
     companion object {

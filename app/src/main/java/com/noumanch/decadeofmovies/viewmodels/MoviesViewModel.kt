@@ -2,8 +2,10 @@ package com.noumanch.decadeofmovies.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.DiffUtil
 import com.noumanch.decadeofmovies.models.Movie
 import com.noumanch.decadeofmovies.repositories.IMovieRepository
+import com.noumanch.decadeofmovies.ui.fragments.PostsDiffUtilCallback
 import com.noumanch.decadeofmovies.utils.erros.AppError
 import com.noumanch.decadeofmovies.utils.erros.Event
 import com.noumanch.decadeofmovies.utils.erros.IPErrorType
@@ -81,9 +83,9 @@ class MoviesViewModel(
             }?.reversed()
 
         if (results == null || results.isEmpty()) {
-            moviesListLiveData.postValue(GetMoviesViewState.Success(mutableListOf()))
+            moviesListLiveData.postValue(GetMoviesViewState.Success(arrayListOf()))
         } else {
-            moviesListLiveData.postValue(GetMoviesViewState.Success(results as MutableList<Movie>))
+            moviesListLiveData.postValue(GetMoviesViewState.Success(results as ArrayList<Movie>))
         }
     }
 

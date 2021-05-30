@@ -4,7 +4,7 @@ import android.app.Application
 import com.google.gson.Gson
 import com.noumanch.decadeofmovies.BuildConfig
 import com.noumanch.decadeofmovies.models.Movie
-import com.noumanch.decadeofmovies.repositories.local.PreferencesManager
+import com.noumanch.decadeofmovies.repositories.local.prefs.PreferencesManager
 import com.noumanch.decadeofmovies.repositories.local.db.AssetMoviesResponse
 import com.noumanch.decadeofmovies.repositories.local.db.MoviesDao
 import com.noumanch.decadeofmovies.repositories.remote.FlickerApiService
