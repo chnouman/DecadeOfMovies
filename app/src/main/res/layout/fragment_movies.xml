@@ -4,25 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/colorBackground"
-    >
+    android:background="?android:attr/colorBackground">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/txtSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@android:drawable/ic_menu_search"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/brownish_grey"
+        android:hint="@string/search_movies_str"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:lines="1"
+        android:padding="10dp"
+        android:textColor="?attr/colorSecondary"
+        android:textColorHint="@color/brownish_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingTop="16dp"
-        android:visibility="visible"
         android:paddingBottom="16dp"
+        android:visibility="visible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_movie"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtSearch"
+        tools:listitem="@layout/item_movie" />
 
     <include
         android:id="@+id/emptyLayout"
-        android:visibility="gone"
-        layout="@layout/empty_layout" />
+        layout="@layout/empty_layout"
+        android:visibility="gone" />
 
     <ProgressBar
         android:id="@+id/progressBar"

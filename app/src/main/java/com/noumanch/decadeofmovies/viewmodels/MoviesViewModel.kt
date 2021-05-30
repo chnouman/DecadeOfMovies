@@ -2,12 +2,17 @@ package com.noumanch.decadeofmovies.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.noumanch.decadeofmovies.utils.rxjava.ISchedulerProvider
 import com.noumanch.decadeofmovies.repositories.IMovieRepository
 import com.noumanch.decadeofmovies.utils.erros.AppError
 import com.noumanch.decadeofmovies.utils.erros.Event
 import com.noumanch.decadeofmovies.utils.erros.IPErrorType
 import io.reactivex.rxjava3.disposables.Disposable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.InputStream
 import java.net.SocketTimeoutException
 
 class MoviesViewModel(
