@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.noumanch.decadeofmovies.R
 import com.noumanch.decadeofmovies.databinding.FragmentMoviesBinding
@@ -80,6 +81,14 @@ class MoviesFragment : Fragment() {
         }
         binding.recyclerView.adapter = adapter
         binding.progressBar.show()
+        // Search Text
+        binding.txtSearch.addTextChangedListener { text ->
+            if (text.isNullOrEmpty()) {
+                moviesViewModel.getMovies()
+            } else {
+                moviesViewModel.searchMovie(text.toString().trim())
+            }
+        }
         //load data
         moviesViewModel.getMovies()
     }

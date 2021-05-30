@@ -22,12 +22,7 @@ class MoviesViewModel(
 
     private var getMoviesDisposable: Disposable? = null
     private val moviesListLiveData = MutableLiveData<GetMoviesViewState>()
-
-    sealed class GetMoviesViewState() {
-        data class Success(val movies: MutableList<Any>) : GetMoviesViewState()
-        object Loading : GetMoviesViewState()
-        data class Error(val error: Event<AppError>) : GetMoviesViewState()
-    }
+    fun getMoviesLiveData() = moviesListLiveData
 
     override fun onCleared() {
         super.onCleared()
@@ -72,5 +67,44 @@ class MoviesViewModel(
             )
     }
 
-    fun getMoviesLiveData() = moviesListLiveData
+    fun searchMovie(query: String) {
+        viewModelScope.launch {
+            moviesRepo.getAllMoviesWithName(query)
+                .doOnSubscribe { moviesListLiveData.postValue(GetMoviesViewState.Loading) }
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui())
+                .subscribe({
+                    moviesListLiveData.postValue(GetMoviesViewState.Success(it.toMutableList()))
+                },
+                    { error ->
+                        moviesListLiveData.value = when (error) {
+                            is SocketTimeoutException -> GetMoviesViewState.Error(
+                                Event(
+                                    AppError(
+                                        error.message ?: "",
+                                        error.cause?.message ?: "",
+                                        IPErrorType.NETWORK_NOT_CONNECTED
+                                    )
+                                )
+                            )
+                            else -> GetMoviesViewState.Error(
+                                Event(
+                                    AppError(
+                                        error.message ?: "",
+                                        error.cause?.message ?: "",
+                                        IPErrorType.OTHER
+                                    )
+                                )
+                            )
+                        }
+                    }
+                )
+        }
+    }
+
+    sealed class GetMoviesViewState() {
+        data class Success(val movies: MutableList<Any>) : GetMoviesViewState()
+        object Loading : GetMoviesViewState()
+        data class Error(val error: Event<AppError>) : GetMoviesViewState()
+    }
 }

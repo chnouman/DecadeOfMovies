@@ -61,7 +61,7 @@ class MoviesAdapter(
     class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemMovieBinding.bind(view)
         fun bind(movie: Movie, ) {
-
+        binding.companyName.text = movie.title
         }
     }
 

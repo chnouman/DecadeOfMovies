@@ -80,4 +80,18 @@ class MovieRepositoryImpl(
             )
         }
     }
+
+    override fun getAllMoviesWithName(query: String): Single<List<Movie>> {
+        return Single.fromCallable {
+            moviesDao.getMoviesByName(query)
+                .groupBy { it.year }
+                .flatMap {
+                    var tempList = it.value.toMutableList()
+                    if (tempList.size > 5) {
+                        tempList = tempList.subList(0, 5)
+                    }
+                    tempList
+                }
+        }
+    }
 }

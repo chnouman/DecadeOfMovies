@@ -8,19 +8,13 @@ import androidx.room.TypeConverters
 import com.noumanch.decadeofmovies.models.Movie
 import com.noumanch.decadeofmovies.utils.JsonListConverter
 
-/**
- * The Swvl App's local SQLite database powered by Room wrapper.
- */
 @Database(
     entities = [Movie::class],
     version = Db.VERSION
 )
 @TypeConverters(JsonListConverter::class)
  abstract class Db: RoomDatabase() {
-    /**
-     * Allows the app to access database through this DAO object
-     * @return [MoviesDao] Data Access Object.
-     */
+
     abstract fun getMoviesDao(): MoviesDao
 
     companion object {
