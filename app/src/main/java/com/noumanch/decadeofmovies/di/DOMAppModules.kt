@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val viewModelModule = module {
 
-    viewModel { MoviesViewModel(get(), get()) }
+    single { MoviesViewModel(get(), get()) }
 
     viewModel { MovieDetailsViewModel(get(), get()) }
 }

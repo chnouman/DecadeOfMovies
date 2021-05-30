@@ -3,30 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginStart="28dp"
     android:layout_marginTop="24dp"
     android:id="@+id/parent"
     android:layout_marginEnd="28dp">
 
-    <com.noumanch.decadeofmovies.ui.widgets.textviews.RegularTextView
+    <com.noumanch.decadeofmovies.ui.widgets.textviews.BoldTextView
         android:id="@+id/heading"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAllCaps="true"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="18sp"
+        tools:text="2019"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.noumanch.decadeofmovies.ui.widgets.textviews.RegularTextView
-        android:id="@+id/headingEnd"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAllCaps="true"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View

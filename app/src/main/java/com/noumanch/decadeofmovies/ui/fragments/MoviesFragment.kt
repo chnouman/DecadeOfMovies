@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.noumanch.decadeofmovies.R
 import com.noumanch.decadeofmovies.databinding.FragmentMoviesBinding
@@ -14,6 +15,7 @@ import com.noumanch.decadeofmovies.utils.extensions.show
 import com.noumanch.decadeofmovies.utils.showAlertDialog
 import com.noumanch.decadeofmovies.viewmodels.MoviesViewModel
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.getViewModel
 
 class MoviesFragment : Fragment() {
 
@@ -78,9 +80,15 @@ class MoviesFragment : Fragment() {
 
     private fun setupViews() {
         //create Adapter
-        adapter = MoviesAdapter(mutableListOf()) { movie ->
-            findNavController().navigate(MoviesFragmentDirections.actionMoviesFragmentToMovieDetailsFragment(movie))
-        }
+        adapter = MoviesAdapter(mutableListOf(), { movie ->
+            findNavController().navigate(
+                MoviesFragmentDirections.actionMoviesFragmentToMovieDetailsFragment(
+                    movie
+                )
+            )
+        }, {
+            binding.txtSearch.text.toString()
+        })
         binding.recyclerView.adapter = adapter
         binding.progressBar.show()
         // Search Text
