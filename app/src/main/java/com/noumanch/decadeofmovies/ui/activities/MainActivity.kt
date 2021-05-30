@@ -1,7 +1,8 @@
-package com.noumanch.decadeofmovies
+package com.noumanch.decadeofmovies.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.noumanch.decadeofmovies.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
