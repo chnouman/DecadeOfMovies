@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DecadeOfMovies</string>
+    <string name="no_results_found_movies">No matches found</string>
+    <string name="you_can_try_some">You can try something different</string>
+    <string name="alert_dialog_ok_button_text">ok</string>
+    <string name="alert_dialog_error_title">Error</string>
+    <string name="alert_dialog_error_message_beginning">" %1$s \nCause: %2$s"</string>
 </resources>

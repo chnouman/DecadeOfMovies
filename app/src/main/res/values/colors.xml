@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="cardRippleColor">#d1d4e2</color>
+    <color name="semi_grey">#8a8a8a</color>
+    <color name="divider_grey">#e7e8f1</color>
+    <color name="brownish_grey">#656565</color>
+    <color name="progressBarColor">#bef67a</color>
 </resources>
