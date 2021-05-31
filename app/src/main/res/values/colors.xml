@@ -13,6 +13,7 @@
     <color name="divider_grey">#e7e8f1</color>
     <color name="brownish_grey">#656565</color>
     <color name="progressBarColor">#bef67a</color>
+    <color name="rating_star_color">#FA9F46</color>
 
 
     <array name="mdcolor_50">

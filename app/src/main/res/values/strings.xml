@@ -8,4 +8,6 @@
     <string name="search_movies_str">Search Movie</string>
     <string name="hello">Hello</string>
     <string name="decade_of_movies">Decade Of Movies</string>
+    <string name="stars">Stars</string>
+    <string name="pictures">Pictures</string>
 </resources>

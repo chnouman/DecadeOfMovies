@@ -9,123 +9,132 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:padding="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back" />
+
 
         <com.noumanch.decadeofmovies.ui.widgets.textviews.BoldTextView
-            android:id="@+id/lblMovieDetails"
+            android:id="@+id/movieNameTV"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="64dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/txtRating"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/cities" />
+
+        <com.noumanch.decadeofmovies.ui.widgets.textviews.RegularTextView
+            android:id="@+id/movieYearTV"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/txtRating"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movieNameTV"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/txtRating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:drawablePadding="5dp"
+            android:numStars="5"
+            android:progressTint="@color/rating_star_color"
+             app:layout_constraintBottom_toBottomOf="@id/movieNameTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/movieNameTV" />
+
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupGenres"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Detail"
-            android:textSize="17sp"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movieYearTV">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardMovieDetails"
-            style="@style/CardViewStyle"
+        </com.google.android.material.chip.ChipGroup>
+
+        <View
+            android:id="@+id/greyView"
             android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/divider_grey"
+            app:layout_constraintBottom_toBottomOf="@id/txtActors"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chipGroupGenres" />
+
+        <com.noumanch.decadeofmovies.ui.widgets.textviews.BoldTextView
+            android:id="@+id/lblActors"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:contentPadding="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/lblMovieDetails">
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:paddingTop="16dp"
+            android:text="@string/stars"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/greyView" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.noumanch.decadeofmovies.ui.widgets.textviews.RegularTextView
-                    android:id="@+id/txtName"
-                    style="@style/TextAppearance.AppCompat.Headline"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                     app:layout_constraintEnd_toStartOf="@+id/txtRating"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@tools:sample/cities" />
-
-                <com.noumanch.decadeofmovies.ui.widgets.textviews.RegularTextView
-                    android:id="@+id/txtRelease"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                     app:layout_constraintEnd_toStartOf="@+id/txtRating"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtName"
-                    tools:text="@tools:sample/date/ddmmyy" />
-
-                <com.noumanch.decadeofmovies.ui.widgets.textviews.RegularTextView
-                    android:id="@+id/txtRating"
-                    style="@style/TextAppearance.AppCompat.Headline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_launcher_background"
-                    android:drawablePadding="5dp"
-                    android:drawableTint="@color/brownish_grey"
-                    app:layout_constraintBottom_toBottomOf="@+id/txtRelease"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="3" />
-
-                <com.noumanch.decadeofmovies.ui.widgets.textviews.RegularTextView
-                    android:id="@+id/lblGenres"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Genre"
-                    android:textColor="@color/brownish_grey"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtRelease" />
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chipGroupGenres"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintTop_toBottomOf="@+id/lblGenres">
-
-                </com.google.android.material.chip.ChipGroup>
-
-                <com.noumanch.decadeofmovies.ui.widgets.textviews.RegularTextView
-                    android:id="@+id/lblActors"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Star"
-                    android:textColor="@color/brownish_grey"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/chipGroupGenres" />
-
-                <com.noumanch.decadeofmovies.ui.widgets.textviews.RegularTextView
-                    android:id="@+id/txtActors"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/brownish_grey"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lblActors" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
+        <com.noumanch.decadeofmovies.ui.widgets.textviews.RegularTextView
+            android:id="@+id/txtActors"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:paddingBottom="32dp"
+            android:textColor="@color/brownish_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblActors"
+            tools:text="Abc ABC ABAC ABAC" />
 
         <com.noumanch.decadeofmovies.ui.widgets.textviews.BoldTextView
             android:id="@+id/lblMoviePictures"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Pictures"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/pictures"
+            android:textColor="@color/black"
             android:textSize="17sp"
-            app:layout_constraintTop_toBottomOf="@+id/cardMovieDetails" />
+            app:layout_constraintTop_toBottomOf="@+id/txtActors" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerPhotos"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="10dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"

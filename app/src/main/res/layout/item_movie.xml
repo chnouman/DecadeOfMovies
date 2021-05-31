@@ -81,23 +81,16 @@
             <androidx.appcompat.widget.AppCompatRatingBar
                 android:id="@+id/movieRating"
                 style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="wrap_content"
+                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:includeFontPadding="false"
-                android:lineSpacingExtra="-4sp"
-                android:numStars="5"
                 android:progress="3"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                android:theme="@style/RatingBar"
+                android:progressTint="@color/white"
                 app:layout_constraintBottom_toBottomOf="@id/movieYearTV"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@id/movieYearTV"
-                app:layout_constraintTop_toTopOf="@id/movieYearTV"
-                tools:text="Rating" />
+                app:layout_constraintTop_toTopOf="@id/movieYearTV" />
 
 
             <androidx.constraintlayout.widget.Guideline

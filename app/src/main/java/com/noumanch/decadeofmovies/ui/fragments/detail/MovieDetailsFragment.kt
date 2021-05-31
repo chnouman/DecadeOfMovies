@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.chip.Chip
+import com.noumanch.decadeofmovies.R
 import com.noumanch.decadeofmovies.databinding.FragmentMovieDetailBinding
 import com.noumanch.decadeofmovies.models.Image
 import com.noumanch.decadeofmovies.utils.extensions.hide
@@ -41,6 +43,7 @@ class MovieDetailsFragment : Fragment() {
     }
 
     fun setupViews() {
+        binding.backButton.setOnClickListener { findNavController().navigateUp() }
         context?.let {
             recyclerAdapter = MoviesDetailAdapter(photosList) { selectedImage ->
                 //any action
@@ -73,9 +76,9 @@ class MovieDetailsFragment : Fragment() {
 
         viewModel.movieModel.observe(viewLifecycleOwner) { movie ->
             binding.apply {
-                txtName.text = movie.title
-                txtRating.text = "${movie.rating}"
-                txtRelease.text = "${movie.year}"
+                movieNameTV.text = movie.title
+                txtRating.rating = movie.rating.toFloat()
+                movieYearTV.text = "${movie.year}"
                 setupGenresChips(movie.genres)
                 setupActors(movie.cast)
             }
@@ -87,11 +90,12 @@ class MovieDetailsFragment : Fragment() {
         binding.apply {
             if (genres == null) {
                 chipGroupGenres.hide()
-                lblGenres.hide()
+
             } else {
                 genres.forEach {
-                    var chip = Chip(context)
+                    val chip = Chip(context)
                     chip.text = it
+                    chip.setBackgroundResource(R.drawable.borders_black)
                     chipGroupGenres.addView(chip)
                 }
             }
