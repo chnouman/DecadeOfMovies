@@ -1,19 +1,17 @@
 package com.noumanch.decadeofmovies.di
 
-import com.noumanch.decadeofmovies.utils.rxjava.AppSchedulerProviderImpl
-import com.noumanch.decadeofmovies.utils.rxjava.ISchedulerProvider
 import com.noumanch.decadeofmovies.repositories.IMovieRepository
 import com.noumanch.decadeofmovies.repositories.MovieRepositoryImpl
-import com.noumanch.decadeofmovies.repositories.local.prefs.PreferencesManager
 import com.noumanch.decadeofmovies.repositories.local.db.Db
-import com.noumanch.decadeofmovies.repositories.local.db.MoviesDao
+import com.noumanch.decadeofmovies.repositories.local.prefs.PreferencesManager
 import com.noumanch.decadeofmovies.repositories.remote.FlickerApiService
+import com.noumanch.decadeofmovies.utils.rxjava.AppSchedulerProviderImpl
+import com.noumanch.decadeofmovies.utils.rxjava.ISchedulerProvider
 import com.noumanch.decadeofmovies.viewmodels.MovieDetailsViewModel
 import com.noumanch.decadeofmovies.viewmodels.MoviesViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
-
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit

@@ -1,4 +1,4 @@
-package com.noumanch.decadeofmovies
+package com.noumanch.decadeofmovies.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer

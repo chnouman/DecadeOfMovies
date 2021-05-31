@@ -63,8 +63,7 @@ class MoviesFragment : Fragment() {
                         binding.emptyLayout.root.hide()
                         binding.emptyLayout.emptyTitleTV.hide()
                         binding.emptyLayout.emptySubHeadingTV.hide()
-                        binding.emptyLayout.emptyIV.hide()
-                        //fill up some colors
+                         //fill up some colors
                         adapter.update(viewState.movies)
                         adapter.notifyDataSetChanged()
                         binding.recyclerView.scrollToPosition(0)
@@ -85,13 +84,12 @@ class MoviesFragment : Fragment() {
     }
 
     private fun setupViews() {
-
         binding.topLayout.setBackgroundResource(R.drawable.cardview_bg)
         //create Adapter
-        adapter = MoviesAdapter(arrayListOf(), { movie ->
+        adapter = MoviesAdapter(arrayListOf(), { movie,position ->
             findNavController().navigate(
                 MoviesFragmentDirections.actionMoviesFragmentToMovieDetailsFragment(
-                    movie
+                    movie,position
                 )
             )
         }, {
@@ -117,6 +115,5 @@ class MoviesFragment : Fragment() {
         binding.emptyLayout.root.show()
         binding.emptyLayout.emptyTitleTV.show()
         binding.emptyLayout.emptySubHeadingTV.show()
-        binding.emptyLayout.emptyIV.show()
-    }
+     }
 }

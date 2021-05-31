@@ -1,50 +1,41 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/large_margin"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/topLayout">
 
-    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/emptyLayoutParent"
-        android:layout_width="match_parent"
+    <com.noumanch.decadeofmovies.ui.widgets.textviews.BoldTextView
+        android:id="@+id/emptyTitleTV"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:layout_centerInParent="true"
-        >
+        android:layout_marginStart="@dimen/extra_standard"
+        android:layout_marginEnd="@dimen/extra_standard"
+        android:text="@string/no_results_found_movies"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/standard_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/emptyIV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            app:srcCompat="@drawable/ic_empty_invoice" />
-
-        <com.noumanch.decadeofmovies.ui.widgets.textviews.BoldTextView
-            android:id="@+id/emptyTitleTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/emptyIV"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text="@string/no_results_found_movies"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <com.noumanch.decadeofmovies.ui.widgets.textviews.RegularTextView
-            android:id="@+id/emptySubHeadingTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/emptyTitleTV"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="20dp"
-            android:text="@string/you_can_try_some"
-            android:textAlignment="center"
-            android:textColor="@color/brownish_grey"
-            android:textSize="16sp"
-
-            />
-
-
-    </RelativeLayout>
-</RelativeLayout>
+    <com.noumanch.decadeofmovies.ui.widgets.textviews.RegularTextView
+        android:id="@+id/emptySubHeadingTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emptyTitleTV"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="@dimen/extra_standard"
+        android:layout_marginTop="@dimen/half_margin"
+        android:layout_marginEnd="@dimen/extra_standard"
+        android:text="@string/you_can_try_some"
+        android:textAlignment="center"
+        android:textColor="@color/brownish_grey"
+        android:textSize="@dimen/standard_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emptyTitleTV" />
+</androidx.constraintlayout.widget.ConstraintLayout>

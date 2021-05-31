@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="cardViewElevation">2dp</dimen>
+    <dimen name="large_margin">64dp</dimen>
+    <dimen name="standard_text_size">16sp</dimen>
+    <dimen name="extra_standard">20dp</dimen>
+    <dimen name="half_margin">8dp</dimen>
+    <dimen name="double_margin">32dp</dimen>
+    <dimen name="single_margin">16dp</dimen>
 </resources>

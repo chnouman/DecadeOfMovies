@@ -1,6 +1,5 @@
 package com.noumanch.decadeofmovies.ui.fragments.detail
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.noumanch.decadeofmovies.R
 import com.noumanch.decadeofmovies.databinding.ItemImageBinding
-import com.noumanch.decadeofmovies.databinding.ItemMovieBinding
-import com.noumanch.decadeofmovies.databinding.ItemMovieHeadingBinding
 import com.noumanch.decadeofmovies.models.Image
-import com.noumanch.decadeofmovies.models.Movie
 
 class MoviesDetailAdapter(
     private var images: MutableList<Image>,

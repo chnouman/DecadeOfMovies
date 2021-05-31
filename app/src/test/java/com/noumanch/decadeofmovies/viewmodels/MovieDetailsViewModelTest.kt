@@ -66,7 +66,7 @@ class MovieDetailsViewModelTest {
                 Observable.just(
                     GetImagesResponse(
                         1,
-                        Images(listOf(Image("", "", "", "", 1, "", 1, 1, 1)))
+                        Images(listOf(Image("", "", "", 1)))
                     )
                 )
             )

@@ -16,7 +16,7 @@ import com.noumanch.decadeofmovies.utils.extensions.show
 
 class MoviesAdapter(
     private var movies: MutableList<Movie>,
-    private val movieClickCallback: (Movie) -> Unit,
+    private val movieClickCallback: (Movie, Int) -> Unit,
     private val updatedSearchQuery: () -> String,
 ) :
     RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
@@ -32,9 +32,21 @@ class MoviesAdapter(
         movies[position].let { movie ->
             holder.bind(movie, position)
             holder.binding.itemSelectView.setOnClickListener {
-                movieClickCallback.invoke(movie)
+                movieClickCallback.invoke(movie, position)
             }
         }
+    }
+
+    fun getColor(position: Int): Int {
+        var colorRes = 0
+        when (position % 5) {
+            0 -> colorRes = R.drawable.gradient_1
+            1 -> colorRes = R.drawable.gradient_2
+            2 -> colorRes = R.drawable.gradient_3
+            3 -> colorRes = R.drawable.gradient_4
+            4 -> colorRes = R.drawable.gradient_5
+        }
+        return colorRes
     }
 
     inner class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -46,15 +58,8 @@ class MoviesAdapter(
             binding.movieRating.stepSize = 1.0f
             binding.movieRating.numStars = 5
             binding.heading.text = "${movie.year}"
-            var colorRes = 0
-            when (position % 5) {
-                0 -> colorRes = R.drawable.gradient_1
-                1 -> colorRes = R.drawable.gradient_2
-                2 -> colorRes = R.drawable.gradient_3
-                3 -> colorRes = R.drawable.gradient_4
-                4 -> colorRes = R.drawable.gradient_5
-            }
-            binding.itemSelectView.setBackgroundResource(colorRes)
+
+            binding.itemSelectView.setBackgroundResource(getColor(position))
             if (updatedSearchQuery.invoke().isEmpty())
                 binding.heading.hide()
             else {

@@ -1,9 +1,12 @@
 package com.noumanch.decadeofmovies.ui.fragments.detail
 
+import android.content.res.ColorStateList
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -43,6 +46,7 @@ class MovieDetailsFragment : Fragment() {
     }
 
     fun setupViews() {
+
         binding.backButton.setOnClickListener { findNavController().navigateUp() }
         context?.let {
             recyclerAdapter = MoviesDetailAdapter(photosList) { selectedImage ->
@@ -57,19 +61,27 @@ class MovieDetailsFragment : Fragment() {
         viewModel.flickrImagesLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is MovieDetailsViewModel.MovieDetailsViewState.Success -> {
-                    photosList.addAll(state.images)
-                    binding.recyclerPhotos.show()
-                    recyclerAdapter.notifyDataSetChanged()
+                    if (state.images.isNotEmpty()) {
+                        binding.emptyLayout.root.hide()
+                        binding.progressBar.hide()
+                        photosList.addAll(state.images)
+                        binding.recyclerPhotos.show()
+                        recyclerAdapter.notifyDataSetChanged()
+                    } else {
+                        populateEmptyView()
+                    }
                 }
                 is MovieDetailsViewModel.MovieDetailsViewState.Error -> {
                     //show error if required
-
+                    populateEmptyView()
                 }
                 is MovieDetailsViewModel.MovieDetailsViewState.Loading -> {
                     //show progress bar
+                    binding.progressBar.show()
                 }
                 is MovieDetailsViewModel.MovieDetailsViewState.NoImageFound -> {
                     //show no images found view
+                    populateEmptyView()
                 }
             }
         }
@@ -90,16 +102,29 @@ class MovieDetailsFragment : Fragment() {
         binding.apply {
             if (genres == null) {
                 chipGroupGenres.hide()
-
             } else {
                 genres.forEach {
                     val chip = Chip(context)
                     chip.text = it
-                    chip.setBackgroundResource(R.drawable.borders_black)
+                    chip.chipCornerRadius = 16.0f
+                    chip.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    chip.setChipBackgroundColorResource(getColor(args.position))
                     chipGroupGenres.addView(chip)
                 }
             }
         }
+    }
+
+    private fun getColor(position: Int): Int {
+        var colorRes = 0
+        when (position % 5) {
+            0 -> colorRes = R.color.purple_700
+            1 -> colorRes = R.color.red_700
+            2 -> colorRes = R.color.pink_700
+            3 -> colorRes = R.color.blue_700
+            4 -> colorRes = R.color.voilet_700
+        }
+        return colorRes
     }
 
     fun setupActors(actors: List<String>?) {
@@ -109,9 +134,19 @@ class MovieDetailsFragment : Fragment() {
                 txtActors.hide()
             } else {
                 actors.forEach {
-                    txtActors.append(it + ", ")
+                    txtActors.append("$it, ")
                 }
             }
         }
+    }
+
+    private fun populateEmptyView() {
+        binding.progressBar.hide()
+        binding.recyclerPhotos.hide()
+        binding.emptyLayout.root.show()
+        binding.emptyLayout.emptyTitleTV.show()
+        binding.emptyLayout.emptySubHeadingTV.show()
+        binding.emptyLayout.emptyTitleTV.text = getString(R.string.no_images_found)
+        binding.emptyLayout.emptySubHeadingTV.text = getString(R.string.images_not_found_desc)
     }
 }
