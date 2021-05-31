@@ -1,8 +1,8 @@
 # Movie App
 
 <p align="center">
-  <img alt='Screenshot 1' src="assets/screenshot_1.jpeg" width="40%"/>
-  <img alt='Screenshot 2' src="assets/screenshot_2.jpeg" width="37.7%"/>
+  <img alt='Screenshot 1' src="assets/screenshot_1.png" width="40%"/>
+  <img alt='Screenshot 2' src="assets/screenshot_2.png" width="37.7%"/>
   <br/>
 </p>
 
