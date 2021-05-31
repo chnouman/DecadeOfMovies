@@ -1,4 +1,4 @@
-# Movie App
+# Decade of Movies App
 
 <p align="center">
   <img alt='Screenshot 1' src="assets/screenshot_1.png" width="40%"/>
