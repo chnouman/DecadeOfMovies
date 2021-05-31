@@ -2,12 +2,11 @@
 
 <p align="center">
   <img alt='Screenshot 1' src="assets/screenshot_1.png" width="40%"/>
-  <img alt='Screenshot 2' src="assets/screenshot_2.png" width="37.7%"/>
+  <img alt='Screenshot 2' src="assets/screenshot_2.png" width="40%"/>
   <br/>
 </p>
 
 Demo Application to understand the architecture of MVVM App with Unit tests
-
 
 
 ## Build Instructions ##
@@ -27,8 +26,29 @@ You can use [Android Studio](http://developer.android.com/sdk/installing/studio.
      |                |-- java           # base module kotlin code
      |                `-- res            # base module resources
 
-## Versioning
-
-For transparency and insight into our release cycle, and for striving to maintain backward compatibility, Movie App will be maintained according to the [Semantic Versioning](http://semver.org/) guidelines as much as possible.
 
 
+## Features :
+
+- Using MVVM (Model-View-ViewModel) Architecture
+- Using Room Persistence for local database
+- Using Koin for Dependency Injection (ViewModels, WebService and Preferences)
+- Using Retrofit to request api network
+- Using JUnit4 with Mockito to write Unit tests
+- Using Glide for loading image from url
+- Using RxJava3 for Threading
+
+## Dependencies :
+
+- [Lifecycle & Livedata](https://developer.android.com/jetpack/androidx/releases/lifecycle)
+- [Navigation Component](https://developer.android.com/jetpack/androidx/releases/navigation)
+- [Retrofit 2](https://square.github.io/retrofit/)
+- [RxJava3](https://github.com/ReactiveX/RxAndroid)
+- [Glide](https://github.com/bumptech/glide)
+- [Koin](https://github.com/InsertKoinIO/koin)
+- [AndroidX](https://mvnrepository.com/artifact/androidx)
+
+
+## Author
+
+[**M Nouman**](https://www.linkedin.com/in/chnouman/)
