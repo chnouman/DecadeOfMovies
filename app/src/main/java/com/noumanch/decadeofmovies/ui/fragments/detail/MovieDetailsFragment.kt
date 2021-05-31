@@ -22,10 +22,12 @@ import org.koin.android.ext.android.inject
 
 class MovieDetailsFragment : Fragment() {
 
+    //getting from DI
     private val viewModel by inject<MovieDetailsViewModel>()
     private lateinit var binding: FragmentMovieDetailBinding
-    private val photosList = arrayListOf<Image>()
     private lateinit var recyclerAdapter: MoviesDetailAdapter
+
+    //fragment arguments
     private val args by navArgs<MovieDetailsFragmentArgs>()
 
     override fun onCreateView(
@@ -39,22 +41,13 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupViews()
         initObservations()
         viewModel.init(args.movie)
     }
 
     fun setupViews() {
-
         binding.backButton.setOnClickListener { findNavController().navigateUp() }
-        context?.let {
-            recyclerAdapter = MoviesDetailAdapter(photosList) { selectedImage ->
-                //any action
-            }
-            binding.recyclerPhotos.isNestedScrollingEnabled = false
-            binding.recyclerPhotos.adapter = recyclerAdapter
-        }
     }
 
     private fun initObservations() {
@@ -62,10 +55,16 @@ class MovieDetailsFragment : Fragment() {
             when (state) {
                 is MovieDetailsViewModel.MovieDetailsViewState.Success -> {
                     if (state.images.isNotEmpty()) {
-                        binding.emptyLayout.root.hide()
-                        binding.progressBar.hide()
-                        photosList.addAll(state.images)
-                        binding.recyclerPhotos.show()
+                        binding.apply {
+                            emptyLayout.root.hide()
+                            progressBar.hide()
+                            recyclerAdapter = MoviesDetailAdapter(state.images) { selectedImage ->
+                                //any action
+                            }
+                            recyclerPhotos.isNestedScrollingEnabled = false
+                            recyclerPhotos.adapter = recyclerAdapter
+                            recyclerPhotos.show()
+                        }
                         recyclerAdapter.notifyDataSetChanged()
                     } else {
                         populateEmptyView()
@@ -105,10 +104,12 @@ class MovieDetailsFragment : Fragment() {
             } else {
                 genres.forEach {
                     val chip = Chip(context)
-                    chip.text = it
-                    chip.chipCornerRadius = 16.0f
-                    chip.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-                    chip.setChipBackgroundColorResource(getColor(args.position))
+                    chip.apply {
+                        text = it
+                        chipCornerRadius = 16.0f
+                        setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                        setChipBackgroundColorResource(getColor(args.position))
+                    }
                     chipGroupGenres.addView(chip)
                 }
             }

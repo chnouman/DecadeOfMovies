@@ -17,7 +17,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-
+//Injectable objects
 val viewModelModule = module {
 
     viewModel { MoviesViewModel(get(), get()) }

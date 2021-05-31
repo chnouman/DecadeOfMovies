@@ -17,5 +17,4 @@ interface MoviesDao {
 
     @Query("SELECT * FROM ${Movie.TABLE_NAME}")
     fun getAllMovies(): MutableList<Movie>
-
 }

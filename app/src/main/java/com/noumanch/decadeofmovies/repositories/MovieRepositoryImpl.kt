@@ -5,11 +5,10 @@ import com.google.gson.Gson
 import com.noumanch.decadeofmovies.BuildConfig
 import com.noumanch.decadeofmovies.models.Movie
 import com.noumanch.decadeofmovies.repositories.local.prefs.PreferencesManager
-import com.noumanch.decadeofmovies.repositories.local.db.AssetMoviesResponse
+import com.noumanch.decadeofmovies.repositories.local.db.AssetsMoviesData
 import com.noumanch.decadeofmovies.repositories.local.db.MoviesDao
 import com.noumanch.decadeofmovies.repositories.remote.FlickerApiService
 import com.noumanch.decadeofmovies.repositories.remote.models.response.GetImagesResponse
-import com.noumanch.decadeofmovies.viewmodels.MoviesViewModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import java.io.IOException
@@ -44,7 +43,7 @@ class MovieRepositoryImpl(
 
     private fun saveAssetMoviesInDatabase(moviesStr: String) {
         val gson = Gson()
-        val assetsMoviesResponse = gson.fromJson(moviesStr, AssetMoviesResponse::class.java)
+        val assetsMoviesResponse = gson.fromJson(moviesStr, AssetsMoviesData::class.java)
         assetsMoviesResponse.movies?.let { movies ->
             moviesDao.insertMovies(movies)
             // stored in db done here
@@ -98,5 +97,4 @@ class MovieRepositoryImpl(
 
     override fun moviesLoadedToDb(): Boolean =
         PreferencesManager.moviesLoaded()
-
 }

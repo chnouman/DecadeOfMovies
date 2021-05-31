@@ -52,27 +52,29 @@ class MoviesAdapter(
     inner class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemMovieBinding.bind(view)
         fun bind(movie: Movie, position: Int) {
-            binding.movieTitleTV.text = movie.title
-            binding.movieYearTV.text = "${movie.year}"
-            binding.movieRating.rating = movie.rating.toFloat()
-            binding.movieRating.stepSize = 1.0f
-            binding.movieRating.numStars = 5
-            binding.heading.text = "${movie.year}"
-
-            binding.itemSelectView.setBackgroundResource(getColor(position))
-            if (updatedSearchQuery.invoke().isEmpty())
-                binding.heading.hide()
-            else {
-                when {
-                    position == 0 -> binding.heading.show()
-                    movie.year != movies[position - 1].year -> binding.heading.show()
-                    else -> binding.heading.hide()
+            binding.apply {
+                movieTitleTV.text = movie.title
+                movieYearTV.text = "${movie.year}"
+                movieRating.rating = movie.rating.toFloat()
+                movieRating.stepSize = 1.0f
+                movieRating.numStars = 5
+                heading.text = "${movie.year}"
+                itemSelectView.setBackgroundResource(getColor(position))
+                if (updatedSearchQuery.invoke().isEmpty()) {
+                    heading.hide()
+                } else {
+                    when {
+                        position == 0 -> heading.show()
+                        movie.year != movies[position - 1].year -> heading.show()
+                        else -> heading.hide()
+                    }
                 }
             }
         }
     }
 
     fun update(list: MutableList<Movie>) {
+        //will be used to optimize recyclerview
         val diffResult = DiffUtil.calculateDiff(
             PostsDiffUtilCallback(
                 movies,

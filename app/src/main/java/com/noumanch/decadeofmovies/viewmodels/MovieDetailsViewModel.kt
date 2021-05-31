@@ -74,7 +74,7 @@ class MovieDetailsViewModel(
     sealed class MovieDetailsViewState {
         object Loading : MovieDetailsViewState()
         object NoImageFound : MovieDetailsViewState()
-        data class Success(val images: List<Image>) : MovieDetailsViewState()
+        data class Success(val images: MutableList<Image>) : MovieDetailsViewState()
         class Error(val error: Event<AppError>) : MovieDetailsViewState()
     }
 }

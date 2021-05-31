@@ -7,5 +7,5 @@ import com.google.gson.annotations.SerializedName
  data class Images(
     @SerializedName("photo")
     @Expose
-    var photos: List<Image>? = null
+    var photos: MutableList<Image>? = null
 )
