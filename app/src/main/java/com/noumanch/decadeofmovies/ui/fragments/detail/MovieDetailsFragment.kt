@@ -54,7 +54,7 @@ class MovieDetailsFragment : Fragment() {
     }
 
     private fun initObservations() {
-        viewModel.uiState.observe(viewLifecycleOwner) { state ->
+        viewModel.flickrImagesLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is MovieDetailsViewModel.MovieDetailsViewState.Success -> {
                     photosList.addAll(state.images)
@@ -74,7 +74,7 @@ class MovieDetailsFragment : Fragment() {
             }
         }
 
-        viewModel.movieModel.observe(viewLifecycleOwner) { movie ->
+        viewModel.currentMovieModel.observe(viewLifecycleOwner) { movie ->
             binding.apply {
                 movieNameTV.text = movie.title
                 txtRating.rating = movie.rating.toFloat()

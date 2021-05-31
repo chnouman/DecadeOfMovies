@@ -175,13 +175,13 @@ class MovieViewModelUnitTest {
         viewModel.searchMovie("")
 
         //error case
-//        val errorMessage = "message"
-//        val errorCauseMessage = "cause"
-//        `when`(moviesRepo.getAllMoviesWithName(anyString(), anyList()))
-//            .thenReturn(Single.error(Throwable(errorMessage, Throwable(errorCauseMessage))))
-//        viewModel.searchMovie("test")
+        val errorMessage = "message"
+        val errorCauseMessage = "cause"
+        `when`(moviesRepo.getAllMoviesWithName(anyString(), anyList()))
+            .thenReturn(Single.error(Throwable(errorMessage, Throwable(errorCauseMessage))))
+        viewModel.searchMovie("")
 
-/*        verify(observer, times(2))
+        verify(observer, times(4))
             .onChanged(argumentCaptor.capture())
         val values = argumentCaptor.allValues
         //assertions on first case
@@ -189,8 +189,7 @@ class MovieViewModelUnitTest {
             MoviesViewModel.GetMoviesViewState.Loading,
             values[0]
         )
-        assert(values[1] is MoviesViewModel.GetMoviesViewState.Success)*/
-/*
+        assert(values[1] is MoviesViewModel.GetMoviesViewState.Success)
         //assertions on error case
         assertEquals(MoviesViewModel.GetMoviesViewState.Loading, values[2])
         assertThat(
@@ -200,7 +199,7 @@ class MovieViewModelUnitTest {
         val errorContent =
             (values[3] as MoviesViewModel.GetMoviesViewState.Error).error.peekContent()
         assertEquals(errorMessage, errorContent.errorMessage)
-        assertEquals(errorCauseMessage, errorContent.errorCause)*/
+        assertEquals(errorCauseMessage, errorContent.errorCause)
     }
 }
 
