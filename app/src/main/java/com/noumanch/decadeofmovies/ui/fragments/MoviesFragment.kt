@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.noumanch.decadeofmovies.R
 import com.noumanch.decadeofmovies.databinding.FragmentMoviesBinding
+import com.noumanch.decadeofmovies.utils.EspressoIdlingResource
 import com.noumanch.decadeofmovies.utils.extensions.hide
 import com.noumanch.decadeofmovies.utils.extensions.show
 import com.noumanch.decadeofmovies.utils.showAlertDialog
@@ -56,6 +57,7 @@ class MoviesFragment : Fragment() {
                 MoviesViewModel.GetMoviesViewState.Loading -> binding.progressBar.show()
                 is MoviesViewModel.GetMoviesViewState.Success -> {
                     binding.progressBar.hide()
+                    EspressoIdlingResource.decrement()
                     if (viewState.movies.size > 0) {
                         binding.apply {
                             recyclerView.show()
@@ -110,6 +112,7 @@ class MoviesFragment : Fragment() {
             }
         }
         //load data
+        EspressoIdlingResource.increment()
         moviesViewModel.getMovies()
     }
 
