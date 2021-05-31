@@ -15,15 +15,7 @@ interface MoviesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMovies(movies: List<Movie>)
 
-    @Query("DELETE FROM ${Movie.TABLE_NAME}")
-    suspend fun deleteAllMovies()
-
-    @Query("SELECT * FROM ${Movie.TABLE_NAME} WHERE movieId = :movieId")
-    fun getMovieById(movieId: Int): Flow<Movie>
-
     @Query("SELECT * FROM ${Movie.TABLE_NAME}")
     fun getAllMovies(): MutableList<Movie>
 
-    @Query("SELECT * FROM ${Movie.TABLE_NAME} WHERE title LIKE '%' || :title || '%' ORDER BY year DESC, rating DESC")
-    fun getMoviesByName(title: String): MutableList<Movie>
 }

@@ -7,7 +7,9 @@ import io.reactivex.rxjava3.core.Single
 
 
 interface IMovieRepository {
-    fun getMovies(): Single<MutableList<Movie>>
-    fun getImagesFromFlickr(query: String,page:Int,perPage:Int):Observable<GetImagesResponse>
-    fun getAllMoviesWithName(query: String):Single<List<Movie>>
-}
+    fun getImagesFromFlickr(query: String, page: Int, perPage: Int): Observable<GetImagesResponse>
+    fun getAllMoviesWithName(query: String,originalData:MutableList<Movie>?): Single<List<Movie>>
+    fun moviesLoadedToDb(): Boolean
+    fun getAllMoviesFromDatabase(): Single<MutableList<Movie>>
+    fun insertDataToDb(): Single<Boolean>
+ }

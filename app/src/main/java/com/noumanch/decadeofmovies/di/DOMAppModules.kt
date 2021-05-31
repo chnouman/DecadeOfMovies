@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val viewModelModule = module {
 
-    single { MoviesViewModel(get(), get()) }
+    viewModel { MoviesViewModel(get(), get()) }
 
     viewModel { MovieDetailsViewModel(get(), get()) }
 }
@@ -33,8 +33,8 @@ val repositoryModule = module {
 
     single<IMovieRepository> { MovieRepositoryImpl(get(), get(), get(), get()) }
 
-    single<PreferencesManager> { PreferencesManager() }
-    single<MoviesDao> { Db.getInstance(androidApplication()).getMoviesDao() }
+    single { PreferencesManager() }
+    single { Db.getInstance(androidApplication()).getMoviesDao() }
 
     single<FlickerApiService> {
         val retrofit = Retrofit.Builder()

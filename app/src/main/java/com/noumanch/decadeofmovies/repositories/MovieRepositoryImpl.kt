@@ -9,9 +9,11 @@ import com.noumanch.decadeofmovies.repositories.local.db.AssetMoviesResponse
 import com.noumanch.decadeofmovies.repositories.local.db.MoviesDao
 import com.noumanch.decadeofmovies.repositories.remote.FlickerApiService
 import com.noumanch.decadeofmovies.repositories.remote.models.response.GetImagesResponse
+import com.noumanch.decadeofmovies.viewmodels.MoviesViewModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import java.io.IOException
+import java.lang.Exception
 
 class MovieRepositoryImpl(
     val application: Application,
@@ -19,24 +21,25 @@ class MovieRepositoryImpl(
     private val moviesDao: MoviesDao
 ) :
     IMovieRepository {
-    override fun getMovies(): Single<MutableList<Movie>> {
-        //check if movies are already loaded to db
+
+    override fun getAllMoviesFromDatabase(): Single<MutableList<Movie>> {
         return Single.fromCallable {
-            if (PreferencesManager.moviesLoaded()) {
-                //load from db
-                getAllMoviesFromDatabase()
-            } else {
+            moviesDao.getAllMovies()
+        }
+    }
+
+    override fun insertDataToDb(): Single<Boolean> {
+        return Single.fromCallable {
+            try {
                 //pick from json and store it to room db
                 readAssets()?.let {
                     saveAssetMoviesInDatabase(it)
                 }
-                getAllMoviesFromDatabase()
+            } catch (e: Exception) {
+                return@fromCallable false
             }
+            return@fromCallable true
         }
-    }
-
-    private fun getAllMoviesFromDatabase(): MutableList<Movie> {
-        return moviesDao.getAllMovies()
     }
 
     private fun saveAssetMoviesInDatabase(moviesStr: String) {
@@ -67,24 +70,33 @@ class MovieRepositoryImpl(
         perPageImages: Int
     ): Observable<GetImagesResponse> {
         return flickrApi.getImages(
-                title = query,
-                apiKey = BuildConfig.FLICKER_API_KEY,
-                page = page,
-                perPage = perPageImages
-            )
+            title = query,
+            apiKey = BuildConfig.FLICKER_API_KEY,
+            page = page,
+            perPage = perPageImages
+        )
     }
 
-    override fun getAllMoviesWithName(query: String): Single<List<Movie>> {
+    override fun getAllMoviesWithName(
+        query: String,
+        originalMoviesData: MutableList<Movie>?
+    ): Single<List<Movie>> {
         return Single.fromCallable {
-            moviesDao.getMoviesByName(query)
-                .groupBy { it.year }
-                .flatMap {
+            //do filtering on back thread
+            return@fromCallable originalMoviesData?.filter {
+                it.title.contains(query, true)
+            }?.groupBy { it.year }
+                ?.flatMap {
                     var tempList = it.value.toMutableList()
                     if (tempList.size > 5) {
                         tempList = tempList.subList(0, 5)
                     }
                     tempList
-                }
+                }?.reversed()
         }
     }
+
+    override fun moviesLoadedToDb(): Boolean =
+        PreferencesManager.moviesLoaded()
+
 }
