@@ -42,7 +42,7 @@ class MoviesFragment : Fragment() {
                     if (!viewState.error.hasBeenHandled) {
                         showAlertDialog(
                             requireContext(),
-                            R.drawable.ic_empty_invoice,
+                            R.drawable.ic_baseline_error_24,
                             R.string.alert_dialog_error_title,
                             resources.getString(
                                 R.string.alert_dialog_error_message_beginning,

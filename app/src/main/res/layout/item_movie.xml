@@ -30,6 +30,8 @@
         android:layout_marginTop="@dimen/single_margin"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:focusable="true"
         app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,9 +42,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/itemSelectView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:focusable="true">
+            android:layout_height="match_parent">
 
             <com.noumanch.decadeofmovies.ui.widgets.textviews.RegularTextView
                 android:id="@+id/movieTitleTV"
@@ -81,7 +81,7 @@
             <androidx.appcompat.widget.AppCompatRatingBar
                 android:id="@+id/movieRating"
                 style="@style/Widget.AppCompat.RatingBar.Small"
-                 android:layout_width="wrap_content"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:progress="3"

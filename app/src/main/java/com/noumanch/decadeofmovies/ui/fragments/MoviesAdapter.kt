@@ -31,7 +31,7 @@ class MoviesAdapter(
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         movies[position].let { movie ->
             holder.bind(movie, position)
-            holder.binding.itemSelectView.setOnClickListener {
+            holder.binding.cardView.setOnClickListener {
                 movieClickCallback.invoke(movie, position)
             }
         }
