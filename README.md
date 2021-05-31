@@ -34,9 +34,10 @@ You can use [Android Studio](http://developer.android.com/sdk/installing/studio.
 - Using Room Persistence for local database
 - Using Koin for Dependency Injection (ViewModels, WebService and Preferences)
 - Using Retrofit to request api network
-- Using JUnit4 with Mockito to write Unit tests
 - Using Glide for loading image from url
 - Using RxJava3 for Threading
+- Using JUnit4 with Mockito to write Unit tests
+- Using JUnit4 with Espresso for UI Testing
 
 ## Dependencies :
 
@@ -47,6 +48,7 @@ You can use [Android Studio](http://developer.android.com/sdk/installing/studio.
 - [Glide](https://github.com/bumptech/glide)
 - [Koin](https://github.com/InsertKoinIO/koin)
 - [AndroidX](https://mvnrepository.com/artifact/androidx)
+- [Espresso](https://github.com/android/testing-samples)
 
 
 ## Author
